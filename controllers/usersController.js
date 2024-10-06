@@ -6,6 +6,7 @@ import { User } from "../models/usersModel.js";
 import {
   signupValidation,
   subscriptionValidation,
+  emailValidation,
 } from "../validation/validation.js";
 import { Jimp } from "jimp";
 import path from "path";
