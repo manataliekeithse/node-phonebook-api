@@ -1,4 +1,5 @@
 import { Contact } from "../models/contactsModel.js";
+import { contactValidation } from "../validation/validation.js";
 
 // This is how the MVC Architecture looks like
 
@@ -29,7 +30,7 @@ const getContactById = async (req, res, next) => {
     const { contactId } = req.params;
 
     // this allows for a more flexible query allowing us to pass different fields
-    const result = Contact.findOne({ _id: contactId });
+    const result = await Contact.findOne({ _id: contactId });
 
     // this is strictly querying using the id
     // const result = Contact.findById(contactId);
@@ -95,8 +96,6 @@ const deleteContact = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-
-  return result;
 };
 
 const updateContact = async (req, res, next) => {
