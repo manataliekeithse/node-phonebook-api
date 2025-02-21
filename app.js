@@ -4,6 +4,8 @@ import cors from "cors";
 
 import { router as contactsRouter } from "./routes/api/contactsRouter.js";
 import { router as usersRouter } from "./routes/api/usersRouter.js";
+import { swaggerSpecs } from "./swaggerConfig.js";
+import { swaggerUi } from "./swaggerConfig.js";
 
 // initialize an express application
 const app = express();
@@ -19,8 +21,8 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
 app.use(
   cors({
-    origin: "*", // or '*' for allowing all origins
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    origin: "http://localhost:3001", // or '*' for allowing all origins and possible url
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
@@ -32,6 +34,8 @@ app.use(express.json());
 // we need to access the localhost port followed by the directory of the static file and the file name and extension
 app.use(express.static("public"));
 
+// add a line to serve the swagger api documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 // initialize the base path for the contacts router
 app.use("/api/contacts", contactsRouter);
 app.use("/api/users", usersRouter);

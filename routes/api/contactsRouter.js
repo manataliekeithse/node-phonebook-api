@@ -11,6 +11,29 @@ import { authenticateToken } from "../../middlewares/auth.js"; // Import the aut
 const router = express.Router();
 
 // corresponds to listContacts
+/**
+ * /api/contacts:
+ *  get:
+ *   summary: Retrieve a list of contacts
+ *   tags: [Contacts]
+ *   parameters:
+ *     - name: contactId
+ *       in: path
+ *       required: true
+ *       description: ID of the contact to retrieve
+ *       schema:
+ *        type: string
+ *   responses:
+ *     200:
+ *      description: Successfully retrieved list of contacts
+ *      content:
+ *       application/json:
+ *       schema:
+ *         type: array
+ *         items:
+ *           $ref:'#/components/schemas/Contact'
+ */
+
 router.get("/", authenticateToken, getAllContacts);
 
 // corresponds to getContactById

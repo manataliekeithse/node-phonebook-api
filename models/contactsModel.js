@@ -24,13 +24,16 @@ const contactSchema = new Schema({
   },
   email: {
     type: String,
+    required: [true, "Set name for contact"],
   },
   phone: {
     type: String,
+    required: [true, "Set name for contact"],
   },
   favorite: {
     type: Boolean,
     default: false,
+    required: [true, "Set name for contact"],
   },
 });
 
